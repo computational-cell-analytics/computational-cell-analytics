@@ -30,7 +30,7 @@ Lecture slides of the latest iteration of the lecture:
 - [Lecture 6: Vision Tasks & Transfer Learning](https://docs.google.com/presentation/d/1j-w_AUgYtr1OBOQMszEROEFg2YJSl4TU/edit?usp=sharing&ouid=113044948772353505255&rtpof=true&sd=true)
 - [Lecture 7: Semantic Segmentation](https://docs.google.com/presentation/d/1RJEE5Rw4Xf0-6o4_9DkDr4TDmgTF7JLH/edit?usp=sharing&ouid=113044948772353505255&rtpof=true&sd=true)
 - [Lecture 8: Obect Detection & Instance Segmentation](https://docs.google.com/presentation/d/1Vg478y5oy8G0PdwbsGXjTtJtkCQPgTzl/edit?usp=sharing&ouid=113044948772353505255&rtpof=true&sd=true)
-- [Lecture 9: Visualizing Neural Nets & Style Trans](ferhttps://docs.google.com/presentation/d/1dHEd6jAtML4kOTYYdHs6MtXkwmb9opR8/edit?usp=sharing&ouid=113044948772353505255&rtpof=true&sd=true)
+- [Lecture 9: Visualizing Neural Nets & Style Transfer](https://docs.google.com/presentation/d/1dHEd6jAtML4kOTYYdHs6MtXkwmb9opR8/edit?usp=sharing&ouid=113044948772353505255&rtpof=true&sd=true)
 - [Lecture 10: Generative Models](https://owncloud.gwdg.de/index.php/s/T2j7oV6cnM8fGoW)
 - [Lecture 11: Semi, Weak & Self-supervision](https://docs.google.com/presentation/d/1NIabYtYOZtmTYwo7SYYakEJMtUObhZ95/edit?usp=sharing&ouid=113044948772353505255&rtpof=true&sd=true)
 - [Lecture 12: Vision Transformers](https://docs.google.com/presentation/d/1OnZnl1xsxJE9ghHjLl4zjtkzzh_bo3o_/edit?usp=sharing&ouid=113044948772353505255&rtpof=true&sd=true)

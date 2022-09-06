@@ -1,4 +1,5 @@
-#! /usr/bin/python3
+#! /home/uni02/UMIN/pape41/Work/software/conda/mambaforge/bin/python
+# NOTE: replace this with the path to your conda installation
 
 import os
 import sys
@@ -6,37 +7,41 @@ import inspect
 import subprocess
 from datetime import datetime
 
-# two days in minutes
+# two hours / days in minutes
+TWO_HOURS = 2 * 60
 TWO_DAYS = 2 * 24 * 60
 
 # currently available gpu types on SCC
 GPU_TYPES = ["gtx980", "gtx1080", "k40"]
 
 
-def write_slurm_template(script, out_path, env_name,
-                         n_threads, gpu_type, n_gpus,
-                         mem_limit, time_limit, qos,
-                         exclude_nodes):
-    # set qos depending on the runtime
-    qos = "short" if time_limit <= TWO_DAYS else "long"
-    slurm_template = f"""#! /bin/bash
+def write_batch_script(script, out_path, env_name,
+                       n_threads, gpu_type, n_gpus,
+                       mem_limit, time_limit, exclude_nodes):
+    batch_script = f"""#! /bin/bash
 #SBATCH -N 1
 #SBATCH -c {n_threads}
 #SBATCH --mem {mem_limit}
-#SBATCH --qos {qos}
 #SBATCH -t {time_limit}
 #SBATCH -p gpu
 #SBATCH -G {gpu_type}:{n_gpus}
 """
-    if exclude_nodes is not None:
-        slurm_template += "#SBATCH --exclude={','.join(exclude_nodes)}\n"
+    # set qos depending on the runtime
+    if time_limit < TWO_HOURS:
+        batch_script += f"#SBATCH --qos short\n"
+    if time_limit > TWO_DAYS:
+        batch_script += f"#SBATCH --qos long\n"
 
-    slurm_template += f"""
-    conda activate {env_name}
-    python {script} $@
+    if exclude_nodes is not None:
+        batch_script += "#SBATCH --exclude={','.join(exclude_nodes)}\n"
+
+    batch_script += f"""
+source ~/.bashrc
+conda activate {env_name}
+python {script} $@
 """
     with open(out_path, 'w') as f:
-        f.write(slurm_template)
+        f.write(batch_script)
 
 
 def submit_slurm(script, input_, n_threads=7, n_gpus=1,
@@ -70,12 +75,10 @@ def submit_slurm(script, input_, n_threads=7, n_gpus=1,
         if env_name is None:
             raise RuntimeError("Could not find conda")
 
-    print("Batch script saved at", batch_script)
-    print("Log will be written to %s, error log to %s" % (log, err))
-    write_slurm_template(script, batch_script, env_name,
-                         int(n_threads), gpu_type, int(n_gpus),
-                         mem_limit, int(time_limit),
-                         exclude_nodes=exclude_nodes)
+    write_batch_script(script, batch_script, env_name,
+                       int(n_threads), gpu_type, int(n_gpus),
+                       mem_limit, int(time_limit),
+                       exclude_nodes=exclude_nodes)
 
     cmd = ["sbatch", "-o", log, "-e", err, "-J", script_name, batch_script]
     cmd.extend(input_)

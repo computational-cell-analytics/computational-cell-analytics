@@ -1,0 +1,20 @@
+channels:
+    - pytorch
+    - conda-forge
+name:
+    main310
+dependencies:
+    - affogato
+    - bioimageio.core
+    - cluster_tools
+    - cudatoolkit >=11.3,<11.4  # set correct cuda version for your system
+    - jupyter
+    - napari
+    - python-elf
+    - pytorch
+    - python 3.10
+    - tensorboard
+    - tifffile
+    - torchvision
+    - tqdm
+    - kornia

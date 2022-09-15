@@ -1,4 +1,4 @@
-#! /home/uni02/UMIN/pape41/Work/software/conda/mambaforge/bin/python
+#! /home/nimcpape/Work/software/conda/mambaforge/bin/python3.10
 # NOTE: replace this with the path to your conda installation
 
 import os
@@ -11,8 +11,9 @@ from datetime import datetime
 TWO_HOURS = 2 * 60
 TWO_DAYS = 2 * 24 * 60
 
-# currently available gpu types on SCC
-GPU_TYPES = ["gtx980", "gtx1080", "k40"]
+# currently there are only v100s available on Emmy, and I don't know yet how to set the gpu type
+# (might not be implemented yet, since there's only a single type)
+GPU_TYPES = ["v100"]
 
 
 def write_batch_script(script, out_path, env_name,
@@ -24,7 +25,7 @@ def write_batch_script(script, out_path, env_name,
 #SBATCH --mem {mem_limit}
 #SBATCH -t {time_limit}
 #SBATCH -p gpu
-#SBATCH -G {gpu_type}:{n_gpus}
+#SBATCH -G {n_gpus}
 """
     # set qos depending on the runtime
     if time_limit < TWO_HOURS:
@@ -45,7 +46,7 @@ python {script} $@
 
 
 def submit_slurm(script, input_, n_threads=7, n_gpus=1,
-                 gpu_type="gtx1080", mem_limit="64G",
+                 gpu_type="v100", mem_limit="64G",
                  time_limit=TWO_DAYS, env_name=None, exclude_nodes=None):
     """Submit python script that needs gpus with given inputs on a slurm node.
     """

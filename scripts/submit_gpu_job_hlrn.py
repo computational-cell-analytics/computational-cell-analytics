@@ -13,11 +13,11 @@ TWO_DAYS = 2 * 24 * 60
 
 # currently there are only v100s available on Emmy, and I don't know yet how to set the gpu type
 # (might not be implemented yet, since there's only a single type)
-GPU_TYPES = ["v100"]
+GPUS = ["v100"]
 
 
 def write_batch_script(script, out_path, env_name,
-                       n_threads, gpu_type, n_gpus,
+                       n_threads, gpu, n_gpus,
                        mem_limit, time_limit, exclude_nodes):
     batch_script = f"""#! /bin/bash
 #SBATCH -N 1
@@ -46,12 +46,12 @@ python {script} $@
 
 
 def submit_slurm(script, input_, n_threads=7, n_gpus=1,
-                 gpu_type="v100", mem_limit="64G",
+                 gpu="v100", mem_limit="64G",
                  time_limit=TWO_DAYS, env_name=None, exclude_nodes=None):
     """Submit python script that needs gpus with given inputs on a slurm node.
     """
-    if gpu_type not in GPU_TYPES:
-        raise ValueError(f"Invalid gpu type, only the types {GPU_TYPES} are available.")
+    if gpu not in GPUS:
+        raise ValueError(f"Invalid gpu type, only the types {GPUS} are available.")
 
     tmp_folder = os.path.expanduser("~/.gpu_jobs")
     os.makedirs(tmp_folder, exist_ok=True)
@@ -77,7 +77,7 @@ def submit_slurm(script, input_, n_threads=7, n_gpus=1,
             raise RuntimeError("Could not find conda")
 
     write_batch_script(script, batch_script, env_name,
-                       int(n_threads), gpu_type, int(n_gpus),
+                       int(n_threads), gpu, int(n_gpus),
                        mem_limit, int(time_limit),
                        exclude_nodes=exclude_nodes)
 

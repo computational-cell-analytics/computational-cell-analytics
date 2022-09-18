@@ -12,11 +12,12 @@ TWO_HOURS = 2 * 60
 TWO_DAYS = 2 * 24 * 60
 
 # currently available gpu types on SCC
-GPU_TYPES = ["gtx980", "gtx1080", "k40"]
+# NOTE: k40 and gtx980 are not very useful for our purposes
+GPUS = ["gtx980", "gtx1080", "k40", "v100"]
 
 
 def write_batch_script(script, out_path, env_name,
-                       n_threads, gpu_type, n_gpus,
+                       n_threads, gpu, n_gpus,
                        mem_limit, time_limit, exclude_nodes):
     batch_script = f"""#! /bin/bash
 #SBATCH -N 1
@@ -24,7 +25,7 @@ def write_batch_script(script, out_path, env_name,
 #SBATCH --mem {mem_limit}
 #SBATCH -t {time_limit}
 #SBATCH -p gpu
-#SBATCH -G {gpu_type}:{n_gpus}
+#SBATCH -G {gpu}:{n_gpus}
 """
     # set qos depending on the runtime
     if time_limit < TWO_HOURS:
@@ -45,12 +46,12 @@ python {script} $@
 
 
 def submit_slurm(script, input_, n_threads=7, n_gpus=1,
-                 gpu_type="gtx1080", mem_limit="64G",
+                 gpu="gtx1080", mem_limit="64G",
                  time_limit=TWO_DAYS, env_name=None, exclude_nodes=None):
     """Submit python script that needs gpus with given inputs on a slurm node.
     """
-    if gpu_type not in GPU_TYPES:
-        raise ValueError(f"Invalid gpu type, only the types {GPU_TYPES} are available.")
+    if gpu not in GPUS:
+        raise ValueError(f"Invalid gpu type, only the types {GPUS} are available.")
 
     tmp_folder = os.path.expanduser("~/.gpu_jobs")
     os.makedirs(tmp_folder, exist_ok=True)
@@ -76,7 +77,7 @@ def submit_slurm(script, input_, n_threads=7, n_gpus=1,
             raise RuntimeError("Could not find conda")
 
     write_batch_script(script, batch_script, env_name,
-                       int(n_threads), gpu_type, int(n_gpus),
+                       int(n_threads), gpu, int(n_gpus),
                        mem_limit, int(time_limit),
                        exclude_nodes=exclude_nodes)
 
@@ -87,10 +88,8 @@ def submit_slurm(script, input_, n_threads=7, n_gpus=1,
 
 def scrape_kwargs(input_):
     params = inspect.signature(submit_slurm).parameters
-    kwarg_names = [name for name in params
-                   if params[name].default != inspect._empty]
-    kwarg_positions = [i for i, inp in enumerate(input_)
-                       if inp in kwarg_names]
+    kwarg_names = [name for name in params if params[name].default != inspect._empty]
+    kwarg_positions = [i for i, inp in enumerate(input_) if inp in kwarg_names]
 
     kwargs = {input_[i]: input_[i + 1] for i in kwarg_positions}
 

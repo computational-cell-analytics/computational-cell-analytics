@@ -9,6 +9,7 @@ dependencies:
     - bioimageio.core
     - cluster_tools
     - detectron2
+    - einops
     - pytorch-cuda=11.6  # you may need to choose a different cuda version depending on your system
     - jupyter
     - monai

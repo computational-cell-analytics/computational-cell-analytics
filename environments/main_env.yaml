@@ -1,5 +1,6 @@
 channels:
     - pytorch
+    - nvidia
     - conda-forge
 name:
     main310
@@ -7,12 +8,13 @@ dependencies:
     - affogato
     - bioimageio.core
     - cluster_tools
-    - cudatoolkit >=11.3,<11.4  # set correct cuda version for your system
+    - detectron2
+    - pytorch-cuda=11.6  # you may need to choose a different cuda version depending on your system
     - jupyter
+    - monai
     - napari
     - python-elf
     - pytorch
-    - python 3.10
     - tensorboard
     - tifffile
     - torchvision

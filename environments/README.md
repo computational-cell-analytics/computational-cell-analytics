@@ -1,4 +1,4 @@
-# Base environment file
+# Base environment files
 
 This directory contains different environment files to reproduce commonly used conda environments.
 

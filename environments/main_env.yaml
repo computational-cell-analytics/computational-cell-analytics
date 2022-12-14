@@ -10,6 +10,7 @@ dependencies:
     - cluster_tools
     - cmake
     - cxx-compiler
+    - einops
     # - detectron2
     # - firefox
     - jupyter

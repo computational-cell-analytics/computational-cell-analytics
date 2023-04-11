@@ -5,25 +5,17 @@ channels:
 name:
     main
 dependencies:
-    - affogato >= 0.3.3
-    - bioimageio.core
-    - cluster_tools
-    - cmake
-    - cxx-compiler
+    - affogato
+    - bioimageio.core >=0.5.0
     - einops
-    # - detectron2
-    # - firefox
     - jupyter
-    # - napari
+    - mobie_utils
+    - pycocotools
     - python-elf
-    - pytorch
-    - pytorch-cuda 11.6
-    # - pytorch-scatter
-    # - pyg
-    - python 3.10
+    - pytorch >=2.0
+    - pytorch-cuda>=11.5
     - tensorboard
     - tifffile
     - torchvision
     - tqdm
     - kornia
-    - pycocotools

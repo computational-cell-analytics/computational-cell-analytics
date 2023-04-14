@@ -9,6 +9,7 @@ from datetime import datetime
 
 # two hours / days in minutes
 TWO_HOURS = 2 * 60
+TWELVE_HOURS = 12 * 60
 TWO_DAYS = 2 * 24 * 60
 
 # currently there are only v100s available on Emmy, and I don't know yet how to set the gpu type
@@ -25,7 +26,7 @@ def write_batch_script(script, out_path, env_name,
 #SBATCH --mem {mem_limit}
 #SBATCH -t {time_limit}
 #SBATCH -p gpu
-#SBATCH -G {n_gpus}
+#SBATCH -G {gpu}:{n_gpus}
 """
     # set qos depending on the runtime
     if time_limit < TWO_HOURS:
@@ -101,7 +102,7 @@ def scrape_kwargs(input_):
     return input_, kwargs
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     script = os.path.realpath(os.path.abspath(sys.argv[1]))
     input_ = sys.argv[2:]
 

@@ -8,7 +8,11 @@ This development had two goals:
 - Improve the efficiency of underyling algorithm (which mostly succeeded, e.g. speeding up watersheds ca. 10x compared to scikit-image's implementation).
 
 A migration guide that explains how to replace the functionality from other libraries can be found [here](https://computational-cell-analytics.github.io/bioimage-cpp/bioimage_cpp.html#migration-guide).
-We have / will 
+We have now migrated the most important python packages from our group to `bioimage-cpp` and will continue with migrating some more, see details below.
+
+**Important for updating your dependencies:**
+- I strongly recommend to create a new conda/mamba environment when installing the software with new dependencies.
+- The migration is fairly well tested, but there may be some bugs. If something doesn't work as expected after the migration create an issue in the respective repository.
 
 ## Migrated libraries / WIP
 

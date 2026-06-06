@@ -31,7 +31,7 @@ Migration for the following libraries is either under way or will happen soon:
 
 The following libraries will not yet be migrated:
 - [cluster_tools](https://github.com/constantinpape/cluster_tools)
-- [coclhea-net](https://github.com/computational-cell-analytics/cochlea-net)
+- [cochlea-net](https://github.com/computational-cell-analytics/cochlea-net)
 - [mobie-utils](https://github.com/mobie/mobie-utils-python)
 
 They require a migration of `cluster_tools`, which requires on `nifty`-functionality that has not yet been migrated because it relies

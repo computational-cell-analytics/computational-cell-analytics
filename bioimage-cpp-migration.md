@@ -1,5 +1,5 @@
 Claude & I recently developed [bioimage-cpp](https://github.com/computational-cell-analytics/bioimage-cpp) that bundles efficient image analysis functionality for segmentation
-and othe rtasks in a single C++ library with light weight python bindings. It reimplements functionality from the libraries [affogato](https://github.com/constantinpape/affogato),
+and other tasks in a single C++ library with light weight python bindings. It reimplements functionality from the libraries [affogato](https://github.com/constantinpape/affogato),
 [nifty](https://github.com/DerThorsten/nifty), and [vigra](https://github.com/ukoethe/vigra) that underly many of the (segmentation) algorithms and software used and developed by our group.
 It also reimplements selected functionality from `scipy.ndimage` and `scikit-image`, such as watersheds and distance transforms, to provide more efficient implementations.
 

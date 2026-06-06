@@ -20,12 +20,12 @@ The following libraries have already been migrated:
 - [elf](https://github.com/constantinpape/elf): version 0.9 is available on conda-forge and PyPI.
 - [torch_em](https://github.com/constantinpape/torch-em): version 0.9 is available on conda-forge and PyPI.
 - [micro_sam](https://github.com/computational-cell-analytics/micro-sam): version 1.8.1 is available on conda-forge and PyPI.
-
-Migration for the following libraries is either under way or will happen soon:
-- [synapse-net](https://github.com/computational-cell-analytics/synapse-net): see https://github.com/computational-cell-analytics/synapse-net/pull/167
 - [patho-sam](https://github.com/computational-cell-analytics/patho-sam): soon
 - [medico-sam](https://github.com/computational-cell-analytics/medico-sam): soon
 - [peft-sam](https://github.com/computational-cell-analytics/peft-sam): soon
+
+Migration for the following libraries is either under way or will happen soon:
+- [synapse-net](https://github.com/computational-cell-analytics/synapse-net): see https://github.com/computational-cell-analytics/synapse-net/pull/167
 
 ## Out-of-scope / pending
 

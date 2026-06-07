@@ -24,8 +24,9 @@ The following libraries have already been migrated:
 - [medico-sam](https://github.com/computational-cell-analytics/medico-sam): done
 - [peft-sam](https://github.com/computational-cell-analytics/peft-sam): done
 
-Migration for the following libraries is either under way or will happen soon:
+Migration for the following libraries is work in progress:
 - [synapse-net](https://github.com/computational-cell-analytics/synapse-net): see https://github.com/computational-cell-analytics/synapse-net/pull/167
+- [z5 / z5py](https://github.com/constantinpape/z5): see https://github.com/constantinpape/z5/pull/245 (Note: this is not a migration to bioimage-cpp but an update of the library to simplify libraries and distribute it via pip, and to support the zarr v3 format in `z5py`)
 
 ## Out-of-scope / pending
 
